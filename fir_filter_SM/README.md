@@ -18,7 +18,3 @@ make bitstream
 make program_fpga
 ```
 
-**A simple UART Trasmitter is already implemented**
-
-( transmit 'a' character one time per second)
-
