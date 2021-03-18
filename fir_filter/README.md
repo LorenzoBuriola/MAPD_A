@@ -17,3 +17,5 @@ make bitstream
 ```console
 make program_fpga
 ```
+
+_W:_ Remember to choose which fir_filter implementation to use, choosing the relative .vhd file and putting it in the /src folder 

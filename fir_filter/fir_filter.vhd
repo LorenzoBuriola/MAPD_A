@@ -89,7 +89,7 @@ begin
     end if;
   end process sum_3rd;
 
-  -- Output process, we choose the 8 bits we are interented in
+  -- Output process, we choose the 8 bits we are interested in
   Output : process (clk)
   begin
     if(rising_edge(clk)) then
