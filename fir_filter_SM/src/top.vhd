@@ -41,6 +41,7 @@ architecture str of top is
   	port(
   		clk 		: in std_logic;
   		data_input 	: in std_logic_vector(7 downto 0);
+  		busy		: in std_logic;
   		valid_input	: in std_logic;
   		data_output	: out std_logic_vector(7 downto 0);
   		valid_output : out std_logic
@@ -60,11 +61,12 @@ begin  -- architecture str
   fir_filter_1 : fir_filter_SM
 
 	port map(
-		clk => CLK100MHZ,
-		data_input => data_to_send,
-		valid_input => data_valid,
-		data_output => data_to_send2,
-		valid_output => data_valid2
+		clk 			=> CLK100MHZ,
+		data_input 		=> data_to_send,
+		valid_input		 => data_valid,
+		data_output 	=> data_to_send2,
+		valid_output 	=> data_valid2,
+		busy 			=> busy 
 	);
       
   uart_transmitter_1 : uart_transmitter
