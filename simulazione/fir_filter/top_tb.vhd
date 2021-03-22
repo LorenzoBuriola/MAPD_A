@@ -26,7 +26,7 @@ begin
       uart_rxd_out   => uart_rxd_out);    
 
 --genero il clock
-  CLK100MHZ <= not CLK100MHZ after 10 ns; --100Mhz -> 10 ns period
+  CLK100MHZ <= not CLK100MHZ after 5 ns; --100Mhz -> 10 ns period
 
  -- waveform generation
   WaveGen_Proc : process
@@ -42,7 +42,7 @@ begin
 
   begin
     -- insert signal assignments here
-    file_open(file_VECTORS, "input_vectors.txt", read_mode); --apro l'input
+    file_open(file_VECTORS, "input_signal.txt", read_mode); --apro l'input
     file_open(file_RESULTS, "output_results.txt", write_mode); --apro l' output
     wait until rising_edge(CLK100MHZ); --ricorda che questi sono i clock veloci 
     data : while not endfile(file_VECTORS) loop --  ciclo fin quando non finiscono i dati

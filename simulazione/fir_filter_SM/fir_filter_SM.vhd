@@ -2,17 +2,18 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity fir_filter is
+entity fir_filter_SM is
     port (
       clk           : in std_logic;
       valid_input   : in std_logic;
+      busy 			: in std_logic;
       data_input    : in std_logic_vector(7 downto 0);
       valid_output  : out std_logic;
       data_output   : out std_logic_vector(7 downto 0)
     );
-    end fir_filter;
+    end fir_filter_SM;
 
-    architecture rtl of fir_filter is
+    architecture rtl of fir_filter_SM is
 
         -- coefficients
         signal coeff_0      : signed(7 downto 0) := to_signed(4, 8);
@@ -46,6 +47,9 @@ entity fir_filter is
         main : process (clk) is
         begin
             if rising_edge(clk) then
+
+          
+
                 case state is
                     when IDLE =>
                         valid_output <= '0';
@@ -79,14 +83,16 @@ entity fir_filter is
                         sum_tot <= resize(sum_sf, 19) + resize(mul2, 19);
                         
                         state <= Output;
-                        
+                   
                     when Output =>
-			valid_output <= '1';
+						valid_output <= '1';
                         data_output     <= std_logic_vector(sum_tot(14 downto 7));
                         
-                        
-                        state <= IDLE;
-                       
+                       	if busy = '0' then
+	                        state <= IDLE;
+    			end if;
+
+     						                  
                     when others => null;
                 end case;
             end if;
